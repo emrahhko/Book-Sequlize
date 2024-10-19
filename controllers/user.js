@@ -46,10 +46,10 @@ const userControllers = {
         const {email, password} = req.body;
         const userExist = await User.findOne({where: {email: email}});
         if(!userExist) {
-            return res.status(404).sen('invalid email or password');
+            return res.status(404).send('invalid email or password');
         }
 
-        const hashedPassword = hashPassword(password);
+        // const hashedPassword = hashPassword(password);
         const doPasswordMatch = userExist.password === hashedPassword;
 
         if (doPasswordMatch) {
@@ -60,7 +60,9 @@ const userControllers = {
             res.cookie('token', token, {httpOnly: true});
 
             return res.status(302).redirect('/api/book');
-        }
+        } else {
+            return res.status(404).send('invalid email or password');
+        };
     },
 
     logout: (req, res) => {
