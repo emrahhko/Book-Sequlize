@@ -9,8 +9,6 @@ function hashPassword(password) {
 
 export default hashPassword;
 
-
-
 // import bcrypt from 'bcrypt';
 
 // const hashPassword = (password) => {
